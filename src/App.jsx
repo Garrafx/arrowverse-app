@@ -105,6 +105,14 @@ export default function App() {
         .nav-btn { background: none; border: none; cursor: pointer; padding: 8px 20px; font-family: 'Bebas Neue', serif; font-size: 18px; letter-spacing: 2px; transition: all 0.2s; color: #666; }
         .nav-btn.active { color: #e8e8f0; border-bottom: 2px solid #c1121f; }
         .nav-btn:hover { color: #aaa; }
+        @media (max-width: 600px) {
+          .ep-row { grid-template-columns: 6px 1fr 28px !important; gap: 10px !important; padding: 10px 12px !important; }
+          .ep-num { display: none !important; }
+          .ep-code { display: none !important; }
+          .ep-date { display: none !important; }
+          .ep-info { display: flex; flex-direction: column; }
+          .ep-series-label { display: block !important; }
+        }
         .filter-btn { background: none; border: 1px solid #333; border-radius: 4px; cursor: pointer; padding: 5px 14px; font-family: 'Inter', sans-serif; font-size: 12px; color: #888; transition: all 0.2s; white-space: nowrap; }
         .filter-btn.active { background: #c1121f; border-color: #c1121f; color: #fff; }
         .filter-btn:hover:not(.active) { border-color: #555; color: #ccc; }
@@ -200,22 +208,22 @@ export default function App() {
                       transition: "background 0.15s",
                     }}
                   >
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#444", textAlign: "right" }}>#{ep[0]}</span>
+                    <span className="ep-num" style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#444", textAlign: "right" }}>#{ep[0]}</span>
                     <div style={{ width: 3, height: 28, background: color, borderRadius: 2, opacity: isWatched ? 0.4 : 1 }} />
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: isWatched ? "#555" : "#888", letterSpacing: 1 }}>{ep[2]}</span>
-                    <div>
+                    <span className="ep-code" style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: isWatched ? "#555" : "#888", letterSpacing: 1 }}>{ep[2]}</span>
+                    <div className="ep-info">
                       <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: isWatched ? "#555" : "#ddd", textDecoration: isWatched ? "line-through" : "none", textDecorationColor: "#444" }}>{ep[3]}</div>
-                      <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#444", marginTop: 2 }}>{ep[1]}</div>
+                      <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#555", marginTop: 2 }}>{ep[1]} · <span style={{ color: "#444" }}>{ep[2]}</span></div>
                     </div>
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#444" }}>{ep[4].split("-").reverse().join("/").slice(0,-5)}</span>
+                    <span className="ep-date" style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#444" }}>{ep[4].split("-").reverse().join("/").slice(0,-5)}</span>
                     <div style={{
-                      width: 20, height: 20, borderRadius: "50%",
+                      width: 24, height: 24, borderRadius: "50%",
                       border: `2px solid ${isWatched ? "#c1121f" : "#333"}`,
                       background: isWatched ? "#c1121f" : "transparent",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       transition: "all 0.2s", flexShrink: 0
                     }}>
-                      {isWatched && <span style={{ color: "#fff", fontSize: 10, lineHeight: 1 }}>✓</span>}
+                      {isWatched && <span style={{ color: "#fff", fontSize: 11, lineHeight: 1 }}>✓</span>}
                     </div>
                   </div>
                 );
